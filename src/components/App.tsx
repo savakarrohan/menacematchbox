@@ -2,6 +2,8 @@ import React from "react";
 
 import MENACEImage from "../style/images/01MatthewScroggsMenace.png";
 import { Introduction } from "./Introduction";
+import { TicTacToe } from "./TicTacToe";
+import Results from "./Results";
 
 export function App() {
   return (
@@ -27,6 +29,8 @@ export function App() {
         <a href="https://www.mscroggs.co.uk/blog/94">Dr Matthew Scroggs blog</a>
       </p>
       <Introduction></Introduction>
+      <TicTacToe />
+      <Results />
     </div>
   );
 }

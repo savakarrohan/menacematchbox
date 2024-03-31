@@ -16,3 +16,53 @@ body {
 ::-webkit-scrollbar {
   width: 0;
 }
+
+/* For the Menace Table */
+table.moves {
+  border: 0;
+}
+td.board {
+  font-family: monospace;
+  border: 1px solid black;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  vertical-align: middle;
+}
+td.num {
+  font-weight: bold;
+  color: #000000;
+}
+table.board td {
+  font-family: monospace;
+  text-align: center;
+  vertical-align: middle;
+}
+table.board:not(.large) td {
+  font-size: 9px;
+  width: 8px;
+  height: 8px;
+}
+table.board.large td {
+  font-size: 22px;
+  width: 40px;
+  height: 40px;
+}
+table.board td,
+table.board tr,
+table.board {
+  border-collapse: collapse;
+}
+table.board td.p1,
+table.board td.p7 {
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+}
+table.board td.p3,
+table.board td.p5 {
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+table.board td.p4 {
+  border: 1px solid grey;
+}
