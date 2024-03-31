@@ -1,1 +1,1 @@
-export type board = (string | null)[][];
+export type board = ("x" | "o" | "")[][];

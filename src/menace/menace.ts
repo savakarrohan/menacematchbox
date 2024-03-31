@@ -12,7 +12,7 @@ export default class Menace {
   }
 
   /**
-   * checkMove
+   * checkMove returns True if it is menace's turn to play
    */
   public checkMove(board: board) {
     let count = 0;
@@ -20,12 +20,12 @@ export default class Menace {
       // i represents row
       for (let j = 0; j < board[i].length; j++) {
         // j represents column
-        if (board[i][j] == "x") {
+        if (board[i][j] == "o" || board[i][j] == "x") {
           count++;
         }
       }
     }
-    return count;
+    return count % 2 == 0;
   }
 
   private _weights;
