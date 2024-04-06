@@ -12,9 +12,9 @@ export default class Menace {
   }
 
   /**
-   * checkMove returns True if it is menace's turn to play
+   * checkMove returns True if it is menace's (o) turn to play
    */
-  public checkMove(board: board) {
+  public checkMove(board: board): boolean {
     let count = 0;
     for (let i = 0; i < board.length; i++) {
       // i represents row

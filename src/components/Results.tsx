@@ -5,6 +5,7 @@ import {
   oTurn,
   solvedBoardo,
   solvedBoardx,
+  solvedDiag,
   unsolvedBoard,
   xTurn,
 } from "../helpers";
@@ -13,7 +14,7 @@ export default function Results() {
   function simpleRun() {
     const a = new Menace({ name: "Simple", weights: [5, 4, 4] });
 
-    return a.checkMove(xTurn) ? "True" : "False";
+    return isSolved(solvedDiag) ? "True" : "False";
   }
   return (
     <>

@@ -29,3 +29,9 @@ export const xTurn: board = [
   ["", "x", "o"],
   ["", "", ""],
 ];
+
+export const solvedDiag: board = [
+  ["x", "o", "x"],
+  ["o", "x", "o"],
+  ["o", "x", "x"],
+];
