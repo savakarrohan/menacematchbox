@@ -1,6 +1,12 @@
 import * as _ from "lodash";
 
-import { isSolved, rotateBoard, singleo } from "../helpers";
+import {
+  isSolved,
+  mirrorHBoard,
+  mirrorVBoard,
+  rotateBoard,
+  singleo,
+} from "../helpers";
 import { board, ele } from "../interfaces";
 
 interface IMenaceOptions {
@@ -9,6 +15,8 @@ interface IMenaceOptions {
 }
 
 export default class Menace {
+  private _weights;
+  private _name;
   constructor(Options: IMenaceOptions) {
     this._weights = Options.weights;
     this._name = Options.name;
@@ -50,21 +58,24 @@ export default class Menace {
         let newBoard = _.cloneDeep(emptyBoard);
         newBoard[i][j] = "o";
 
-        console.log(states.some((state) => _.isEqual(state, singleo)));
+        // If not included in states add this to states
+        if (!this.checkInStates(states, newBoard)) {
+          states.push(newBoard);
+        }
+      }
+    }
 
-        // If not included in states add this
-        if (!states.some((state) => _.isEqual(state, newBoard))) {
-          let rota1 = rotateBoard(newBoard);
-          console.log("rota1", rota1);
-          if (!states.some((state) => _.isEqual(state, rota1))) {
-            let rota2 = rotateBoard(rota1);
-            console.log("rota2", rota2);
-            if (!states.some((state) => _.isEqual(state, rota2))) {
-              let rota3 = rotateBoard(rota2);
-              console.log("rota3", rota3);
-              if (!states.some((state) => _.isEqual(state, rota3))) {
-                states.push(newBoard);
-              }
+    // For the second move 1x 1o
+    // Let's loop through the firstStates created
+    const firstStates = _.cloneDeep(states);
+    for (let stateNum = 0; stateNum < firstStates.length; stateNum++) {
+      for (let i = 0; i < firstStates[stateNum].length; i++) {
+        for (let j = 0; j < firstStates[stateNum][i].length; j++) {
+          let stateBoard = _.cloneDeep(firstStates[stateNum]);
+          if (stateBoard[i][j] !== "o") {
+            stateBoard[i][j] = "x";
+            if (!this.checkInStates(states, stateBoard)) {
+              states.push(stateBoard);
             }
           }
         }
@@ -75,6 +86,51 @@ export default class Menace {
     console.log("states", states);
   }
 
-  private _weights;
-  private _name;
+  private checkRotationInStates(states: board[], newBoard: board) {
+    if (!states.some((state) => _.isEqual(state, newBoard))) {
+      let rota1 = rotateBoard(newBoard);
+      // console.log("rota1", rota1);
+      if (!states.some((state) => _.isEqual(state, rota1))) {
+        let rota2 = rotateBoard(rota1);
+        // console.log("rota2", rota2);
+        if (!states.some((state) => _.isEqual(state, rota2))) {
+          let rota3 = rotateBoard(rota2);
+          // console.log("rota3", rota3);
+          if (!states.some((state) => _.isEqual(state, rota3))) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  private checkMirrorInStates(states: board[], newBoard: board) {
+    // First check if it is present
+    if (!states.some((state) => _.isEqual(state, newBoard))) {
+      // Check if mirrorH is present
+      let mirH = mirrorHBoard(newBoard);
+      if (!states.some((state) => _.isEqual(state, mirH))) {
+        // Check if mirrorV is present in state
+        let mirV = mirrorVBoard(newBoard);
+        if (!states.some((state) => _.isEqual(state, mirV))) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private checkInStates(states: board[], newBoard: board) {
+    if (!this.checkRotationInStates(states, newBoard)) {
+      if (!this.checkMirrorInStates(states, newBoard)) {
+        let mirH = mirrorHBoard(newBoard);
+        if (!this.checkRotationInStates(states, mirH)) {
+          let mirV = mirrorVBoard(newBoard);
+          if (!this.checkRotationInStates(states, mirV)) return false;
+        }
+      }
+    }
+    return true;
+  }
 }

@@ -26,3 +26,21 @@ export function rotateBoard(board: board): board {
 
   return rotatedBoard;
 }
+
+/**
+ *
+ * @param board Board to be mirrored
+ * @returns The horizontally mirrored board
+ */
+export function mirrorHBoard(board: board): board {
+  return board.map((row) => row.slice().reverse());
+}
+
+/**
+ *
+ * @param board Board to be mirrored
+ * @returns The vertically mirrored board
+ */
+export function mirrorVBoard(board: board): board {
+  return board.slice().reverse();
+}
