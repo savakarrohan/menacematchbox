@@ -44,3 +44,24 @@ export function mirrorHBoard(board: board): board {
 export function mirrorVBoard(board: board): board {
   return board.slice().reverse();
 }
+
+/**
+ * A function to mirror about Second diagonal
+ * @param board Board to be mirrored
+ * @returns The antiDiagonal mirrored
+ */
+export function mirrorAboutSecondDiagonal(board: board) {
+  return board.map((row, rowIndex) =>
+    row.map(
+      (_, colIndex) =>
+        board[board.length - colIndex - 1][board.length - rowIndex - 1]
+    )
+  );
+}
+
+// Function to mirror a board about the first diagonal (main diagonal)
+export function mirrorAboutFirstDiagonal(board: board) {
+  return board.map((row, rowIndex) =>
+    row.map((_, colIndex) => board[colIndex][rowIndex])
+  );
+}

@@ -2,6 +2,8 @@ import React from "react";
 import Menace from "../menace/menace";
 import {
   isSolved,
+  mirrorAboutFirstDiagonal,
+  mirrorAboutSecondDiagonal,
   mirrorHBoard,
   oTurn,
   solvedBoardo,
@@ -15,7 +17,7 @@ export default function Results() {
   function simpleRun() {
     const a = new Menace({ name: "Simple", weights: [5, 4, 4] });
 
-    console.log("mirrored", mirrorHBoard(oTurn));
+    console.log("mirrored", mirrorAboutFirstDiagonal(solvedDiag));
 
     a.statesCreate();
     return isSolved(solvedDiag) ? "True" : "False";
