@@ -35,3 +35,9 @@ export const solvedDiag: board = [
   ["o", "x", "o"],
   ["o", "x", "x"],
 ];
+
+export const singleo: board = [
+  ["", "", "o"],
+  ["", "", ""],
+  ["", "", ""],
+];

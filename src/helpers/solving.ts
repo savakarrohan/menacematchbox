@@ -1,4 +1,6 @@
-export function isSolved(board: (string | null)[][]) {
+import { board } from "../interfaces";
+
+export function isSolved(board: board) {
   // Check rows
   for (let i = 0; i < 3; i++) {
     if (

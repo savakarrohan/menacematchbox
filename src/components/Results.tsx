@@ -14,6 +14,7 @@ export default function Results() {
   function simpleRun() {
     const a = new Menace({ name: "Simple", weights: [5, 4, 4] });
 
+    a.statesCreate();
     return isSolved(solvedDiag) ? "True" : "False";
   }
   return (
